@@ -1,66 +1,109 @@
-// src/App.tsx
+'use client';
+import { useState, useRef } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/card';
 
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
-import honoLogo from "./assets/hono.svg";
-import "./App.css";
+export default function App() {
+  const [username, setUsername] = useState('');
+  const [userSet, setUserSet] = useState(false);
+  const [recording, setRecording] = useState(false);
+  const [markdown, setMarkdown] = useState('');
 
-function App() {
-	const [count, setCount] = useState(0);
-	const [name, setName] = useState("unknown");
+  const mediaRecorder = useRef<MediaRecorder | null>(null);
+  const chunks = useRef<BlobPart[]>([]);
 
-	return (
-		<>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-				<a href="https://hono.dev/" target="_blank">
-					<img src={honoLogo} className="logo cloudflare" alt="Hono logo" />
-				</a>
-				<a href="https://workers.cloudflare.com/" target="_blank">
-					<img
-						src={cloudflareLogo}
-						className="logo cloudflare"
-						alt="Cloudflare logo"
-					/>
-				</a>
-			</div>
-			<h1>Vite + React + Hono + Cloudflare</h1>
-			<div className="card">
-				<button
-					onClick={() => setCount((count) => count + 1)}
-					aria-label="increment"
-				>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<div className="card">
-				<button
-					onClick={() => {
-						fetch("/api/")
-							.then((res) => res.json() as Promise<{ name: string }>)
-							.then((data) => setName(data.name));
-					}}
-					aria-label="get name"
-				>
-					Name from API is: {name}
-				</button>
-				<p>
-					Edit <code>worker/index.ts</code> to change the name
-				</p>
-			</div>
-			<p className="read-the-docs">Click on the logos to learn more</p>
-		</>
-	);
+  async function startRecording() {
+    setRecording(true);
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder.current = new MediaRecorder(stream);
+
+    mediaRecorder.current.ondataavailable = (e) => chunks.current.push(e.data);
+    mediaRecorder.current.onstop = async () => {
+			console.log("hello")
+      const audioBlob = new Blob(chunks.current, { type: 'audio/webm' });
+      chunks.current = [];
+      const formData = new FormData();
+      formData.append('file', audioBlob);
+      formData.append('username', username);
+			
+			// download the audioBlob for testing	
+			const url = URL.createObjectURL(audioBlob);
+			const a = document.createElement('a');
+			a.style.display = 'none';
+			a.href = url;
+			a.download = 'recording.webm';
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+
+      // const res = await fetch('/api/summarize', { method: 'POST', body: formData });
+      // const data = await res.json();
+      setMarkdown("# Hello");
+      setRecording(false);
+    };
+
+    mediaRecorder.current.start();
+  }
+
+  function stopRecording() {
+    if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
+      mediaRecorder.current.stop();
+    }
+  }
+
+  if (!userSet) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-purple-500 to-indigo-600 p-4">
+        <Card className="p-8 w-full max-w-md">
+          <h1 className="text-2xl font-bold mb-4">🎙 VoicePad</h1>
+          <Input
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="mb-4"
+          />
+          <Button
+            onClick={() => setUserSet(true)}
+            disabled={!username}
+            className="w-full"
+          >
+            Continue
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-purple-500 to-indigo-600 p-4">
+      <Card className="p-8 w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-2">🎙 VoicePad</h1>
+        <p className="text-sm text-gray-600 mb-4">User: {username}</p>
+        {!recording ? (
+          <Button
+            onClick={startRecording}
+            disabled={recording}
+            className="w-full mb-4"
+          >
+            Start Recording
+          </Button>
+        ) : (
+          <Button
+            onClick={stopRecording}
+            variant="destructive"
+            className="w-full mb-4"
+          >
+            Stop Recording
+          </Button>
+        )}
+        {markdown && (
+          <Card className="bg-gray-50 p-4 overflow-auto max-h-96">
+            <pre className="text-sm whitespace-pre-wrap">{markdown}</pre>
+          </Card>
+        )}
+      </Card>
+    </div>
+  );
 }
 
-export default App;
