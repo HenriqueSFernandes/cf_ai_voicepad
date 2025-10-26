@@ -27,13 +27,13 @@ export default function App() {
 			formData.append("audio", audioBlob, "recording.webm");
 			formData.append("username", username);
 
-			const res = await fetch("/api/transcribe", {
+			const res = await fetch("/api/process", {
 				method: "POST",
 				body: formData,
 			});
 			const data = await res.json();
 
-			setMarkdown(data.transcription);
+			setMarkdown(data.result);
 			setRecording(false);
 		};
 
