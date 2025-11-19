@@ -20,6 +20,8 @@ This project is built using the following technologies:
 
 Voicepad is an application that transcribes spoken audio into text. This text is then processed and summarized into Markdown format. The summary includes key ideas and can generate actionable items as a todo list. The primary goal is to convert spoken input into organized, written notes.
 
+A deployed version can be found here: [voicepad.henriquesf.me](https://voicepad.henriquesf.me)
+
 ## Running Instructions
 
 To run this project locally, follow these steps:
