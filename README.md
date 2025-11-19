@@ -10,14 +10,15 @@ This project is a submission for the Cloudflare Summer Internship Program applic
 
 This project is built using the following technologies:
 
--   **Cloudflare Workers:** For serverless backend logic and running the AI model.
+-   **Cloudflare Workers:** For serverless backend logic.
+-   **Cloudflare Workers AI:** For running the AI model.
 -   **Hono:** A simple, web framework for the edge, used for routing in the Worker.
 -   **React:** For building the user interface.
 -   **Vite:** For frontend tooling and development server.
 
-## Project Documentation
+## Project Overview
 
-(Documentation to be added)
+Voicepad is an application that transcribes spoken audio into text. This text is then processed and summarized into Markdown format. The summary includes key ideas and can generate actionable items as a todo list. The primary goal is to convert spoken input into organized, written notes.
 
 ## Running Instructions
 
