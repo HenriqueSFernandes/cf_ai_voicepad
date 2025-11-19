@@ -46,6 +46,12 @@ To run this project locally, follow these steps:
     ```
     This command builds the project and deploys the Cloudflare Worker to your Cloudflare account.
 
+## Future Work
+
+- Realtime transcription and summarization.
+- Improved UI/UX design.
+- Data persistence and user authentication.
+
 ## AI Prompts Used
 
 (AI Prompts to be added to `PROMPTS.md`)
