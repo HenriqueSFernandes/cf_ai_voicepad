@@ -1,90 +1,48 @@
-# React + Vite + Hono + Cloudflare Workers
+# Warning
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/vite-react-template)
+**This project is currently under development and is a prototype. It is not 100% functional and may contain bugs or incomplete features.**
 
-This template provides a minimal setup for building a React application with TypeScript and Vite, designed to run on Cloudflare Workers. It features hot module replacement, ESLint integration, and the flexibility of Workers deployments.
+# Cloudflare AI Voicepad
 
-![React + TypeScript + Vite + Cloudflare Workers](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/fc7b4b62-442b-4769-641b-ad4422d74300/public)
+This project is a submission for the Cloudflare Summer Internship Program application.
 
-<!-- dash-content-start -->
+## Tech Stack
 
-🚀 Supercharge your web development with this powerful stack:
+This project is built using the following technologies:
 
-- [**React**](https://react.dev/) - A modern UI library for building interactive interfaces
-- [**Vite**](https://vite.dev/) - Lightning-fast build tooling and development server
-- [**Hono**](https://hono.dev/) - Ultralight, modern backend framework
-- [**Cloudflare Workers**](https://developers.cloudflare.com/workers/) - Edge computing platform for global deployment
+-   **Cloudflare Workers:** For serverless backend logic and running the AI model.
+-   **Hono:** A simple, web framework for the edge, used for routing in the Worker.
+-   **React:** For building the user interface.
+-   **Vite:** For frontend tooling and development server.
 
-### ✨ Key Features
+## Project Documentation
 
-- 🔥 Hot Module Replacement (HMR) for rapid development
-- 📦 TypeScript support out of the box
-- 🛠️ ESLint configuration included
-- ⚡ Zero-config deployment to Cloudflare's global network
-- 🎯 API routes with Hono's elegant routing
-- 🔄 Full-stack development setup
-- 🔎 Built-in Observability to monitor your Worker
+(Documentation to be added)
 
-Get started in minutes with local development or deploy directly via the Cloudflare dashboard. Perfect for building modern, performant web applications at the edge.
+## Running Instructions
 
-<!-- dash-content-end -->
+To run this project locally, follow these steps:
 
-## Getting Started
+1.  **Install dependencies:**
+    ```bash
+    pnpm install
+    ```
+2.  **Start the development server:**
+    ```bash
+    pnpm dev
+    ```
 
-To start a new project with this template, run:
+3.  **Build for production:**
+    ```bash
+    pnpm build
+    ```
 
-```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/vite-react-template
-```
+4.  **Deploy to Cloudflare Workers:**
+    ```bash
+    pnpm deploy
+    ```
+    This command builds the project and deploys the Cloudflare Worker to your Cloudflare account.
 
-A live deployment of this template is available at:
-[https://react-vite-template.templates.workers.dev](https://react-vite-template.templates.workers.dev)
+## AI Prompts Used
 
-## Development
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server with:
-
-```bash
-npm run dev
-```
-
-Your application will be available at [http://localhost:5173](http://localhost:5173).
-
-## Production
-
-Build your project for production:
-
-```bash
-npm run build
-```
-
-Preview your build locally:
-
-```bash
-npm run preview
-```
-
-Deploy your project to Cloudflare Workers:
-
-```bash
-npm run build && npm run deploy
-```
-
-Monitor your workers:
-
-```bash
-npx wrangler tail
-```
-
-## Additional Resources
-
-- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers/)
-- [Vite Documentation](https://vitejs.dev/guide/)
-- [React Documentation](https://reactjs.org/)
-- [Hono Documentation](https://hono.dev/)
+(AI Prompts to be added to `PROMPTS.md`)
