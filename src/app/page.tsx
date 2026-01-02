@@ -1,8 +1,8 @@
 "use client";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useRef, useState } from "react";
 
 export default function Home() {
 	const [username, setUsername] = useState("");

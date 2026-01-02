@@ -3,34 +3,39 @@
 	"name": "cf-ai-voicepad",
 	"main": ".open-next/worker.js",
 	"compatibility_date": "2025-12-01",
-	"compatibility_flags": [
-		"nodejs_compat",
-		"global_fetch_strictly_public"
-	],
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"routes": [
 		{
 			"pattern": "voicepad.henriquesf.me",
-			"custom_domain": true,
-		},
+			"custom_domain": true
+		}
 	],
 	"assets": {
 		"binding": "ASSETS",
-		"directory": ".open-next/assets",
+		"directory": ".open-next/assets"
 	},
 	"images": {
-		"binding": "IMAGES",
+		"binding": "IMAGES"
 	},
 	"services": [
 		{
 			"binding": "WORKER_SELF_REFERENCE",
-			"service": "cf-ai-voicepad",
-		},
+			"service": "cf-ai-voicepad"
+		}
 	],
 	"ai": {
 		"binding": "AI",
-		"remote": true,
+		"remote": true
 	},
 	"observability": {
-		"enabled": true,
+		"enabled": true
 	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "voicepad-db",
+			"database_id": "2c98aa98-5b76-4897-a539-02e43efaecc0",
+			"migrations_dir": "src/db/migrations"
+		}
+	]
 }
