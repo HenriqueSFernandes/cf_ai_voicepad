@@ -1,10 +1,10 @@
 "use client";
-import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { useRef, useState } from "react";
 
-export default function App() {
+export default function Home() {
 	const [username, setUsername] = useState("");
 	const [userSet, setUserSet] = useState(false);
 	const [recording, setRecording] = useState(false);
@@ -27,13 +27,29 @@ export default function App() {
 			formData.append("audio", audioBlob, "recording.webm");
 			formData.append("username", username);
 
-			const res = await fetch("/api/process", {
-				method: "POST",
-				body: formData,
-			});
-			const data = await res.json();
+			// const res = await fetch("/api/process", {
+			// 	method: "POST",
+			// 	body: formData,
+			// });
+			//
+			// const data = await res.json();
 
-			setMarkdown(data.result);
+			// download the audio for testing
+			const url = URL.createObjectURL(audioBlob);
+			const a = document.createElement("a");
+			a.style.display = "none";
+			a.href = url;
+			a.download = "recording.webm";
+			document.body.appendChild(a);
+			a.click();
+			setTimeout(() => {
+				document.body.removeChild(a);
+				window.URL.revokeObjectURL(url);
+			}, 100);
+
+			setMarkdown(
+				"# Transcribed Markdown\n\n*This is a placeholder for the transcribed markdown content.*",
+			);
 			setRecording(false);
 		};
 

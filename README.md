@@ -10,11 +10,9 @@ This project is a submission for the Cloudflare Summer Internship Program applic
 
 This project is built using the following technologies:
 
--   **Cloudflare Workers:** For serverless backend logic.
--   **Cloudflare Workers AI:** For running the AI model.
--   **Hono:** A simple, web framework for the edge, used for routing in the Worker.
--   **React:** For building the user interface.
--   **Vite:** For frontend tooling and development server.
+- **Cloudflare Workers:** For serverless backend logic.
+- **Cloudflare Workers AI:** For running the AI model.
+- **Next.js:** The framework.
 
 ## Project Overview
 
@@ -31,11 +29,13 @@ To run this project locally, follow these steps:
     pnpm install
     ```
 2.  **Start the development server:**
+
     ```bash
     pnpm dev
     ```
 
 3.  **Build for production:**
+
     ```bash
     pnpm build
     ```
@@ -52,6 +52,7 @@ To run this project locally, follow these steps:
 - Improved UI/UX design.
 - Data persistence and user authentication.
 
-## AI Prompts Used
+## Use of AI
 
-(AI Prompts to be added to `PROMPTS.md`)
+AI was used in the development of this project, but all code was manually written. It assisted in brainstorming ideas and in the architecture of the project.
+
